@@ -21,12 +21,12 @@ app.on("ready", async () => {
   await prepareNext("./renderer");
 
   const mainWindow = new BrowserWindow({
-    height: 540, 
-    width: 660,
+    height: 840, 
+    width: 1200,
     frame: false,
     titleBarStyle: 'hidden', 
     trafficLightPosition: { x: 16, y: 16 },
-    minHeight: 540, 
+    minHeight: 580, 
     minWidth: 660,
     webPreferences: {
       nodeIntegration: false,
@@ -81,6 +81,15 @@ ipcMain.handle('save-history', async (_, item: any) => {
     return history;
   } catch (error) {
     console.error('Failed to save history:', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('clear-history', async () => {
+  try {
+    await writeFile(HISTORY_FILE_PATH, JSON.stringify([]), 'utf-8');
+  } catch (error) {
+    console.error('Failed to clear history:', error);
     throw error;
   }
 });

@@ -14,6 +14,7 @@ export interface IElectron {
   // 履歴管理
   saveHistory: (item: Omit<TokenCountHistory, 'id' | 'timestamp'>) => Promise<TokenCountHistory[]>;
   getHistory: () => Promise<TokenCountHistory[]>;
+  clearHistory: () => Promise<void>;
 }
 
 declare global {
