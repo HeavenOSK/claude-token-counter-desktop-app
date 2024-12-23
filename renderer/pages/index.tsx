@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { Model, MODELS } from '../interfaces/model';
 import { HistoryPanel } from '../components/HistoryPanel';
 import { useTokenHistory } from '../hooks/useTokenHistory';
