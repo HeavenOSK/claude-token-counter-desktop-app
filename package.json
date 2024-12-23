@@ -1,7 +1,11 @@
 {
   "private": true,
+  "version": "1.0.0",
+  "description": "Desktop application for counting Claude API tokens",
+  "author": "HeavenOSK",
   "main": "main/electron-src/index.js",
   "productName": "Claude Token Counter",
+  
   "scripts": {
     "clean": "rimraf dist main renderer/out renderer/.next",
     "dev": "npm run build-electron && electron .",
