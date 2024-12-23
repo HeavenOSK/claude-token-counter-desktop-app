@@ -33,7 +33,7 @@ const IndexPage = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex h-full">
     <main className="p-8 flex flex-col items-center min-w-0 flex-1">
       <div className="w-full max-w-2xl">
         <h1 className="text-3xl font-bold mb-2">
