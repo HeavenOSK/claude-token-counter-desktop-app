@@ -65,7 +65,7 @@ const IndexPage = () => {
               Token counting API docs
             </a>
             <a
-              href="https://github.com/HeavenOSK/claude-token-counter"
+              href="https://github.com/HeavenOSK/claude-token-counter-desktop-app"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-gray-900"
