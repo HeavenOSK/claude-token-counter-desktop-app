@@ -52,7 +52,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <main className="min-h-screen p-8 flex flex-col items-center">
+    <main className="p-8 flex flex-col items-center h-full">
       <div className="w-full max-w-2xl pr-[240px]">
         <h1 className="text-3xl font-bold mb-8">Settings</h1>
         

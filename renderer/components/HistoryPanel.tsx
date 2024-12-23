@@ -14,7 +14,7 @@ export const HistoryPanel = ({ history, onClear }: Props) => {
   };
 
   return (
-    <div className="w-[240px] bg-white border-l border-gray-200 overflow-y-auto z-10">
+    <div className="w-[240px] h-full bg-white border-l border-gray-200 overflow-y-auto z-10">
       <div className="sticky top-0 bg-white border-b border-gray-200 p-3 flex justify-between items-center">
         <h2 className="font-bold text-sm">History</h2>
         <button
