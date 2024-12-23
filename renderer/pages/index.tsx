@@ -1,18 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Model, MODELS } from '../interfaces/model';
 import { HistoryPanel } from '../components/HistoryPanel';
 import { useTokenHistory } from '../hooks/useTokenHistory';
+import { keychainUtils } from '../utils/keychain';
 
 const IndexPage = () => {
   const [model, setModel] = useState<Model>(MODELS[0]);
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [tokenCount, setTokenCount] = useState<number | null>(null);
+  const [hasApiKey, setHasApiKey] = useState<boolean>(false);
   const { history, addHistoryItem, clearHistory } = useTokenHistory();
 
+  useEffect(() => {
+    const checkApiKey = async () => {
+      try {
+        const apiKey = await keychainUtils.getApiKey();
+        setHasApiKey(!!apiKey);
+      } catch (error) {
+        console.error('Failed to check API key:', error);
+        setHasApiKey(false);
+      }
+    };
+    checkApiKey();
+  }, []);
+
   const countTokens = async () => {
-    if (!text || isLoading) return;
+    if (!text || isLoading || !hasApiKey) return;
 
     setIsLoading(true);
     try {
@@ -82,11 +97,17 @@ const IndexPage = () => {
           <div className="flex flex-col items-center gap-4">
             <button
               onClick={countTokens}
-              disabled={isLoading || !text}
+              disabled={isLoading || !text || !hasApiKey}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
               {isLoading ? 'Counting...' : 'Count Tokens'}
             </button>
+            
+            {!hasApiKey && (
+              <p className="text-red-500">
+                Please set your API key in the settings to use the token counter.
+              </p>
+            )}
             
             {tokenCount !== null && (
               <p className="text-lg">
