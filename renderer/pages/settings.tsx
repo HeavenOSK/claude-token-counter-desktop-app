@@ -41,12 +41,12 @@ const SettingsPage = () => {
     try {
       const savedApiKey = await keychainUtils.getApiKey();
       if (savedApiKey) {
-        setMessage(`保存されている API Key:\n ${maskApiKey(savedApiKey)}`);
+        alert(`保存されている API Key:\n ${maskApiKey(savedApiKey).slice(0, 26)}`);
       } else {
-        setMessage('API Key が保存されていません');
+        alert('API Key が保存されていません');
       }
     } catch (error) {
-      setMessage('API Key の取得に失敗しました');
+      alert('API Key の取得に失敗しました');
       console.error(error);
     }
   };
