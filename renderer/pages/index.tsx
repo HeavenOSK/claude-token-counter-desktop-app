@@ -12,7 +12,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="Claude Token Counter">
-      <h1>Claude Token Counter</h1>
+      <h1 className="text-2xl font-bold">Claude Token Counter</h1>
       <div>
         <textarea 
           placeholder="テキストを入力してください..."
