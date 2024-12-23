@@ -1,3 +1,5 @@
+import { Model } from './model';
+
 export interface IElectron {
   sayHello: () => void;
   receiveHello: (handler: (event: any, ...args: any[]) => void) => void;
@@ -6,6 +8,8 @@ export interface IElectron {
   saveApiKey: (apiKey: string) => Promise<void>;
   getApiKey: () => Promise<string | null>;
   deleteApiKey: () => Promise<void>;
+  // トークンカウント
+  countTokens: (text: string, model: Model) => Promise<number>;
 }
 
 declare global {

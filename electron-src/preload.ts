@@ -17,4 +17,6 @@ contextBridge.exposeInMainWorld("electron", {
   saveApiKey: (apiKey: string) => ipcRenderer.invoke('save-api-key', apiKey),
   getApiKey: () => ipcRenderer.invoke('get-api-key'),
   deleteApiKey: () => ipcRenderer.invoke('delete-api-key'),
+  // トークンカウント
+  countTokens: (text: string, model: string) => ipcRenderer.invoke('count-tokens', text, model),
 });

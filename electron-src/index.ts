@@ -7,6 +7,7 @@ import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 import keytar from 'keytar';
+import Anthropic from '@anthropic-ai/sdk';
 
 // Constants
 const SERVICE_NAME = 'claude-token-counter';
@@ -70,6 +71,30 @@ ipcMain.handle('delete-api-key', async () => {
     await keytar.deletePassword(SERVICE_NAME, ACCOUNT_NAME);
   } catch (error) {
     console.error('Failed to delete API key:', error);
+    throw error;
+  }
+});
+
+// トークンカウント
+ipcMain.handle('count-tokens', async (_, text: string, model: string) => {
+  try {
+    const apiKey = await keytar.getPassword(SERVICE_NAME, ACCOUNT_NAME);
+    if (!apiKey) {
+      throw new Error('API key is not set');
+    }
+
+    const anthropic = new Anthropic({
+      apiKey,
+    });
+
+    const result = await anthropic.beta.messages.countTokens({
+      model,
+      messages: [{ role: "user", content: text }],
+    });
+    
+    return result.input_tokens;
+  } catch (error) {
+    console.error('Failed to count tokens:', error);
     throw error;
   }
 });
