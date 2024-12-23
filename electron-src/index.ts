@@ -21,8 +21,8 @@ app.on("ready", async () => {
   await prepareNext("./renderer");
 
   const mainWindow = new BrowserWindow({
-    height: 580, 
-    width: 660,
+    height: 840, 
+    width: 1200,
     frame: false,
     titleBarStyle: 'hidden', 
     trafficLightPosition: { x: 16, y: 16 },
