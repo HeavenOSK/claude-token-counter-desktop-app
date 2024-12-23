@@ -10,7 +10,7 @@ const IndexPage = () => {
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [tokenCount, setTokenCount] = useState<number | null>(null);
-  const { history } = useTokenHistory();
+  const { history, addHistoryItem } = useTokenHistory();
 
   const countTokens = async () => {
     if (!text || isLoading) return;
@@ -19,6 +19,11 @@ const IndexPage = () => {
     try {
       const count = await window.electron.countTokens(text, model);
       setTokenCount(count);
+      await addHistoryItem({
+        model,
+        text,
+        tokenCount: count,
+      });
     } catch (error) {
       console.error('Failed to count tokens:', error);
       alert('Failed to count tokens. Please make sure your API key is set correctly.');
