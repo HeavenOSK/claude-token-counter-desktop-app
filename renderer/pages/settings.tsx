@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
 import { keychainUtils } from '../utils/keychain';
 
 const SettingsPage = () => {
@@ -8,7 +7,7 @@ const SettingsPage = () => {
   const [hasStoredKey, setHasStoredKey] = useState(false);
 
   const maskApiKey = (key: string) => {
-    const visibleLength = Math.ceil(key.length * 0.2); // 20%を表示
+    const visibleLength = Math.ceil(3); // 20%を表示
     const visiblePart = key.slice(0, visibleLength); // 先頭の20%
     const maskedPart = '*'.repeat(key.length - visibleLength); // 残りを*で埋める
     return visiblePart + maskedPart;
@@ -42,7 +41,7 @@ const SettingsPage = () => {
     try {
       const savedApiKey = await keychainUtils.getApiKey();
       if (savedApiKey) {
-        setMessage(`保存されている API Key: ${maskApiKey(savedApiKey)}`);
+        setMessage(`保存されている API Key:\n ${maskApiKey(savedApiKey)}`);
       } else {
         setMessage('API Key が保存されていません');
       }
@@ -53,113 +52,49 @@ const SettingsPage = () => {
   };
 
   return (
-    <Layout title="Settings">
-      <div className="settings-container">
-        <h1>設定</h1>
+    <main className="min-h-screen p-8 flex flex-col items-center">
+      <div className="w-full max-w-2xl pr-[240px]">
+        <h1 className="text-3xl font-bold mb-8">設定</h1>
         
-        <div className="form-group">
-          <label htmlFor="apiKey">API Key</label>
+        <div className="">
+          <label htmlFor="apiKey" className="block mb-2 font-bold text-gray-700">
+            API Key
+          </label>
           <input
             type="password"
             id="apiKey"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder="Enter your API Key"
+            className="w-full p-4 border rounded-lg mb-4 font-mono"
           />
         </div>
 
-        <div className="button-group">
+        <div className="flex gap-4 mb-6">
           <button 
             onClick={handleSave} 
-            className="save-button"
             disabled={hasStoredKey && !apiKey}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
             {hasStoredKey && !apiKey ? '保存済み' : '保存'}
           </button>
-          <button onClick={handleTest} className="test-button">
+          <button 
+            onClick={handleTest}
+            className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+          >
             保存確認
           </button>
         </div>
 
         {message && (
-          <div className="message">
-            {message}
+          <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-gray-600 overflow-hidden text-sm">
+            <div className="overflow-hidden">
+              {message}
+            </div>
           </div>
         )}
-
-        <style jsx>{`
-          .settings-container {
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-          }
-
-          .form-group {
-            margin-bottom: 20px;
-          }
-
-          label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-          }
-
-          input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-          }
-
-          .button-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-          }
-
-          button {
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.2s;
-          }
-
-          button:disabled {
-            background-color: #6c757d;
-            cursor: not-allowed;
-            opacity: 0.65;
-          }
-
-          .save-button {
-            background-color: #007bff;
-            color: white;
-          }
-
-          .save-button:hover:not(:disabled) {
-            background-color: #0056b3;
-          }
-
-          .test-button {
-            background-color: #6c757d;
-            color: white;
-          }
-
-          .test-button:hover {
-            background-color: #545b62;
-          }
-
-          .message {
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-          }
-        `}</style>
       </div>
-    </Layout>
+    </main>
   );
 };
 
