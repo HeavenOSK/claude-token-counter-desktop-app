@@ -1,9 +1,10 @@
 // Native
 import { join } from "path";
 import { format } from "url";
+import { readFile, writeFile } from "fs/promises";
+import { app, BrowserWindow, ipcMain, IpcMainEvent } from "electron";
 
 // Packages
-import { BrowserWindow, app, ipcMain, IpcMainEvent } from "electron";
 import isDev from "electron-is-dev";
 import prepareNext from "electron-next";
 import keytar from 'keytar';
@@ -11,6 +12,8 @@ import Anthropic from '@anthropic-ai/sdk';
 
 // Constants
 const SERVICE_NAME = 'claude-token-counter';
+const HISTORY_FILE_PATH = join(app.getPath('userData'), 'token-history.json');
+const MAX_HISTORY_ITEMS = 100;
 const ACCOUNT_NAME = 'api-key';
 
 // Prepare the renderer once the app is ready
@@ -45,6 +48,50 @@ app.on("window-all-closed", app.quit);
 ipcMain.on("message", (event: IpcMainEvent, message: any) => {
   console.log(message);
   setTimeout(() => event.sender.send("message", "hi from electron"), 500);
+});
+
+// 履歴の保存と取得
+ipcMain.handle('save-history', async (_, item: any) => {
+  try {
+    let history = [];
+    try {
+      const data = await readFile(HISTORY_FILE_PATH, 'utf-8');
+      history = JSON.parse(data);
+    } catch (error: any) {
+      // ファイルが存在しない場合は空の配列を使用
+      if (error.code !== 'ENOENT') {
+        console.error('Failed to read history file:', error);
+      }
+      history = [];
+    }
+
+    const newItem = {
+      ...item,
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+    };
+
+    history = [newItem, ...history].slice(0, MAX_HISTORY_ITEMS);
+    await writeFile(HISTORY_FILE_PATH, JSON.stringify(history), 'utf-8');
+    return history;
+  } catch (error) {
+    console.error('Failed to save history:', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('get-history', async () => {
+  try {
+    const data = await readFile(HISTORY_FILE_PATH, 'utf-8');
+    return JSON.parse(data);
+  } catch (error: any) {
+    // ファイルが存在しない場合は空の配列を返す
+    if (error.code === 'ENOENT') {
+      return [];
+    }
+    console.error('Failed to get history:', error);
+    throw error;
+  }
 });
 
 // API Key管理のためのIPC通信ハンドラー

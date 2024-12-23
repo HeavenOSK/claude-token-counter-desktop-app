@@ -1,4 +1,5 @@
 import { Model } from './model';
+import { TokenCountHistory } from './history';
 
 export interface IElectron {
   sayHello: () => void;
@@ -10,6 +11,9 @@ export interface IElectron {
   deleteApiKey: () => Promise<void>;
   // トークンカウント
   countTokens: (text: string, model: Model) => Promise<number>;
+  // 履歴管理
+  saveHistory: (item: Omit<TokenCountHistory, 'id' | 'timestamp'>) => Promise<TokenCountHistory[]>;
+  getHistory: () => Promise<TokenCountHistory[]>;
 }
 
 declare global {
