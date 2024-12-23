@@ -21,13 +21,13 @@ app.on("ready", async () => {
   await prepareNext("./renderer");
 
   const mainWindow = new BrowserWindow({
-    width:1000,
-    height: 640,
+    height: 540, 
+    width: 660,
     frame: false,
     titleBarStyle: 'hidden', 
-    trafficLightPosition: { x: 20, y: 20 },
-    minHeight: 240, 
-    minWidth: 400,
+    trafficLightPosition: { x: 16, y: 16 },
+    minHeight: 540, 
+    minWidth: 660,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

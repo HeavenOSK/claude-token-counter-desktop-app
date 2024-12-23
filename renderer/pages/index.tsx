@@ -33,8 +33,9 @@ const IndexPage = () => {
   };
 
   return (
-    <main className="min-h-screen p-8 flex flex-col items-center">
-      <div className="w-full max-w-2xl pr-[240px]">
+    <div className="flex">
+    <main className="p-8 flex flex-col items-center min-w-0 flex-1">
+      <div className="w-full max-w-2xl">
         <h1 className="text-3xl font-bold mb-2">
           Claude Token Counter
         </h1>
@@ -45,7 +46,7 @@ const IndexPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-gray-900"
-          >
+            >
             <Image src="/globe.svg" alt="Docs" width={14} height={14} />
             Token counting API docs
           </a>
@@ -54,24 +55,17 @@ const IndexPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 hover:text-gray-900"
-          >
+            >
             <Image src="/globe.svg" alt="GitHub" width={14} height={14} />
             View source on GitHub
           </a>
-          <Link
-            href="/settings"
-            className="flex items-center gap-1 hover:text-gray-900"
-          >
-            <Image src="/globe.svg" alt="Settings" width={14} height={14} />
-            Settings
-          </Link>
         </div>
   
         <select
           value={model}
           onChange={(e) => setModel(e.target.value as Model)}
           className="w-full p-2 mb-6 border rounded-lg font-mono"
-        >
+          >
           {MODELS.map((modelOption) => (
             <option key={modelOption} value={modelOption}>
               {modelOption}
@@ -84,14 +78,14 @@ const IndexPage = () => {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Enter your text here..."
-        />
+          />
         
         <div className="flex flex-col items-center gap-4">
           <button
             onClick={countTokens}
             disabled={isLoading || !text}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
+            >
             {isLoading ? 'Counting...' : 'Count Tokens'}
           </button>
           
@@ -102,8 +96,9 @@ const IndexPage = () => {
           )}
         </div>
       </div>      
-      <HistoryPanel history={history} />
     </main>
+      <HistoryPanel history={history} />
+    </div>
   );
 };
 
