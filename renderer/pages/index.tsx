@@ -2,12 +2,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Model, MODELS } from '../interfaces/model';
+import { HistoryPanel } from '../components/HistoryPanel';
+import { useTokenHistory } from '../hooks/useTokenHistory';
 
 const IndexPage = () => {
   const [model, setModel] = useState<Model>(MODELS[0]);
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [tokenCount, setTokenCount] = useState<number | null>(null);
+  const { history } = useTokenHistory();
 
   const countTokens = async () => {
     if (!text || isLoading) return;
@@ -93,7 +96,8 @@ const IndexPage = () => {
             </p>
           )}
         </div>
-      </div>
+      </div>      
+      <HistoryPanel history={history} />
     </main>
   );
 };
