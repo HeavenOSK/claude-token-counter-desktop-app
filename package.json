@@ -1,7 +1,7 @@
 {
   "private": true,
   "main": "main/electron-src/index.js",
-  "productName": "ElectronTypescriptNext",
+  "productName": "Claude Token Counter",
   "scripts": {
     "clean": "rimraf dist main renderer/out renderer/.next",
     "dev": "npm run build-electron && electron .",
