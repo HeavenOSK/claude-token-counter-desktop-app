@@ -80,9 +80,26 @@ const SettingsPage = () => {
           </button>
           <button 
             onClick={handleTest}
-            className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700"
+            className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled={!hasStoredKey}
           >
-            Show Stored Key
+            Show Key
+          </button>
+          <button 
+            onClick={async () => {
+              try {
+                await keychainUtils.deleteApiKey();
+                setHasStoredKey(false);
+                setMessage('API Key has been cleared');
+              } catch (error) {
+                setMessage('Failed to clear API Key');
+                console.error(error);
+              }
+            }}
+            className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled={!hasStoredKey}
+          >
+            Clear Key
           </button>
         </div>
 
