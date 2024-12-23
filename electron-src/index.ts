@@ -85,6 +85,15 @@ ipcMain.handle('save-history', async (_, item: any) => {
   }
 });
 
+ipcMain.handle('clear-history', async () => {
+  try {
+    await writeFile(HISTORY_FILE_PATH, JSON.stringify([]), 'utf-8');
+  } catch (error) {
+    console.error('Failed to clear history:', error);
+    throw error;
+  }
+});
+
 ipcMain.handle('get-history', async () => {
   try {
     const data = await readFile(HISTORY_FILE_PATH, 'utf-8');

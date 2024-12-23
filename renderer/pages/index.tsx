@@ -10,7 +10,7 @@ const IndexPage = () => {
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [tokenCount, setTokenCount] = useState<number | null>(null);
-  const { history, addHistoryItem } = useTokenHistory();
+  const { history, addHistoryItem, clearHistory } = useTokenHistory();
 
   const countTokens = async () => {
     if (!text || isLoading) return;
@@ -97,7 +97,7 @@ const IndexPage = () => {
         </div>
       </div>      
     </main>
-      <HistoryPanel history={history} />
+      <HistoryPanel history={history} onClear={clearHistory} />
     </div>
   );
 };

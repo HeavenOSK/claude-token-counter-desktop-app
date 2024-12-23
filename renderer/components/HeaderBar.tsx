@@ -23,8 +23,8 @@ export const TitleBar: React.FC = () => {
             <span className="text-sm text-gray-500">Home</span>
           </Link>
         ): (<Link href="/settings" className="flex items-center gap-2 px-2 py-1 rounded hover:bg-gray-100">
-          <Cog6ToothIcon className={`w-4 h-4 ${isSettingsPage ? 'text-blue-500' : 'text-gray-500'}`} />
-          <span className={`text-sm ${isSettingsPage ? 'text-blue-500' : 'text-gray-500'}`}>Settings</span>
+          <Cog6ToothIcon className={`w-4 h-4 text-gray-500`} />
+          <span className={`text-sm text-gray-500`}>Settings</span>
         </Link>)}
         
       </div>

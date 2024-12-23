@@ -24,4 +24,5 @@ contextBridge.exposeInMainWorld("electron", {
   saveHistory: (item: Omit<TokenCountHistory, 'id' | 'timestamp'>) => 
     ipcRenderer.invoke('save-history', item),
   getHistory: () => ipcRenderer.invoke('get-history'),
+  clearHistory: () => ipcRenderer.invoke('clear-history'),
 });

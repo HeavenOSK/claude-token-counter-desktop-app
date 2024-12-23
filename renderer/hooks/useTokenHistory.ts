@@ -18,8 +18,18 @@ export const useTokenHistory = () => {
     }
   };
 
+  const clearHistory = async () => {
+    try {
+      await window.electron.clearHistory();
+      setHistory([]);
+    } catch (error) {
+      console.error('Failed to clear history:', error);
+    }
+  };
+
   return {
     history,
     addHistoryItem,
+    clearHistory,
   };
 };
