@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Model, MODELS } from '../interfaces/model';
 
 const IndexPage = () => {
@@ -49,6 +50,13 @@ const IndexPage = () => {
             <Image src="/globe.svg" alt="GitHub" width={14} height={14} />
             View source on GitHub
           </a>
+          <Link
+            href="/settings"
+            className="flex items-center gap-1 hover:text-gray-900"
+          >
+            <Image src="/globe.svg" alt="Settings" width={14} height={14} />
+            Settings
+          </Link>
         </div>
   
         <select

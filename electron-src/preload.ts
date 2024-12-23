@@ -2,6 +2,7 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { contextBridge, ipcRenderer } from "electron";
 import { IpcRendererEvent } from "electron/main";
+import { TokenCountHistory } from "../renderer/interfaces/history";
 
 // We are using the context bridge to securely expose NodeAPIs.
 // Please note that many Node APIs grant access to local system resources.
@@ -19,4 +20,8 @@ contextBridge.exposeInMainWorld("electron", {
   deleteApiKey: () => ipcRenderer.invoke('delete-api-key'),
   // トークンカウント
   countTokens: (text: string, model: string) => ipcRenderer.invoke('count-tokens', text, model),
+  // 履歴管理
+  saveHistory: (item: Omit<TokenCountHistory, 'id' | 'timestamp'>) => 
+    ipcRenderer.invoke('save-history', item),
+  getHistory: () => ipcRenderer.invoke('get-history'),
 });
