@@ -57,9 +57,16 @@ const SettingsPage = () => {
         <h1 className="text-3xl font-bold mb-8">Settings</h1>
         
         <div className="">
-          <label htmlFor="apiKey" className="block mb-2 font-bold text-gray-700">
-            API Key
-          </label>
+          <div className="flex items-center gap-2 mb-2">
+            <label htmlFor="apiKey" className="font-bold text-gray-700">
+              API Key
+            </label>
+            {!hasStoredKey && (
+              <span className="text-sm text-red-500">
+                (Required for token counting)
+              </span>
+            )}
+          </div>
           <input
             type="password"
             id="apiKey"
