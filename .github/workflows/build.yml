@@ -14,6 +14,8 @@ jobs:
         platform: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
+    permissions:
+      contents: write
     steps:
       # Actions の基本設定
       - name: Check out Git repositry
