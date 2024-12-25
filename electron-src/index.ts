@@ -50,18 +50,21 @@ app.on("ready", async () => {
 app.on("window-all-closed", app.quit);
 
 // listen the channel `message` and resend the received message to the renderer process
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ipcMain.on("message", (event: IpcMainEvent, message: any) => {
   console.log(message);
   setTimeout(() => event.sender.send("message", "hi from electron"), 500);
 });
 
 // 履歴の保存と取得
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ipcMain.handle('save-history', async (_, item: any) => {
   try {
     let history = [];
     try {
       const data = await readFile(HISTORY_FILE_PATH, 'utf-8');
       history = JSON.parse(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       // ファイルが存在しない場合は空の配列を使用
       if (error.code !== 'ENOENT') {
@@ -98,6 +101,7 @@ ipcMain.handle('get-history', async () => {
   try {
     const data = await readFile(HISTORY_FILE_PATH, 'utf-8');
     return JSON.parse(data);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // ファイルが存在しない場合は空の配列を返す
     if (error.code === 'ENOENT') {
