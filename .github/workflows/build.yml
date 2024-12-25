@@ -29,9 +29,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #### webpackなどによるビルドが必要なとき ####
-      # - name: Build
-        # run: npm run build
+      - name: Build
+        run: npm run build
 
       # GitHub releases へデプロイ
       - name: Deploy
