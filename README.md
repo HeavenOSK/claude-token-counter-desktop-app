@@ -1,48 +1,63 @@
-# Electron with Typescript application example
+# Claude Token Counter Desktop App
 
-This example shows how to use Next.js inside an Electron application. To avoid a lot of configuration, we use Next.js as a router for pages, and use server rendering to speed up the initial render of the application. Both Next.js and Electron layers are written in TypeScript and compiled to JavaScript during the build process.
+A desktop application for counting tokens using the Claude API.
 
-| Part       | Source code (Typescript) | Builds (JavaScript) |
-| ---------- | ------------------------ | ------------------- |
-| Next.js    | `/renderer`              | `/renderer`         |
-| Electron   | `/electron-src`          | `/main`             |
-| Production |                          | `/dist`             |
+## Features
 
-For development it's going to run a HTTP server and let Next.js handle routing. In production it will use `output: 'export'` to pre-generate HTML static files and use them in your app (instead of running a HTTP server).
+- 🔢 Accurate token counting using Claude API
+- 🔐 Secure API key storage using system keychain
+- 📝 Token count history tracking and display
+- 🎯 Support for multiple Claude models
+- 🖥️ Cross-platform support (Windows, macOS, Linux)
 
-## How to use
+## Installation
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+1. Download the latest installer from the [releases page](https://github.com/HeavenOSK/claude-token-counter-desktop-app/releases)
+2. Run the installer to install the application
+3. Get your API key from [Anthropic](https://console.anthropic.com/)
+4. Set up your API key in the application settings
 
-```bash
-npx create-next-app --example with-electron-typescript with-electron-typescript-app
-```
+## Development
 
-```bash
-yarn create next-app --example with-electron-typescript with-electron-typescript-app
-```
+### Requirements
 
-```bash
-pnpm create next-app --example with-electron-typescript with-electron-typescript-app
-```
+- Node.js 22.12.0
+- [mise](https://mise.jdx.dev/) (recommended for Node.js version management)
 
-Available commands:
+### Setup
 
 ```bash
-"build-renderer": build and transpile Next.js layer
-"build-electron": transpile electron layer
-"build": build both layers
-"dev": start dev version
-"dist": create production electron build
-"type-check": check TypeScript in project
+# Clone the repository
+git clone https://github.com/HeavenOSK/claude-token-counter-desktop-app.git
+cd claude-token-counter-desktop-app
+
+# Install dependencies
+npm install
+
+# Start in development mode
+npm run dev
 ```
 
-## Notes
+### Available Scripts
 
-You can create the production app using `npm run dist`.
+- `npm run dev` - Start in development mode
+- `npm run build` - Build the application
+- `npm run dist` - Create distribution package
+- `npm run type-check` - Run TypeScript type checking
 
-_note regarding types:_
+### Project Structure
 
-- Electron provides its own type definitions, so you don't need @types/electron installed!
-  source: https://www.npmjs.com/package/@types/electron
-- There were no types available for `electron-next` at the time of creating this example, so until they are available there is a file `electron-next.d.ts` in `electron-src` directory.
+| Directory | Description |
+|-----------|-------------|
+| `/renderer` | Next.js frontend |
+| `/electron-src` | Electron main process |
+| `/main` | Built Electron code |
+| `/dist` | Distribution package |
+
+## License
+
+[MIT License](LICENSE)
+
+## Related Links
+
+- [Claude Token Counting API Documentation](https://docs.anthropic.com/en/docs/build-with-claude/token-counting)
