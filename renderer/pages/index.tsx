@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { Model, MODELS } from '../interfaces/model';
 import { HistoryPanel } from '../components/HistoryPanel';
 import { useTokenHistory } from '../hooks/useTokenHistory';
@@ -61,16 +60,16 @@ const IndexPage = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-gray-900"
               >
-              <Image src="/globe.svg" alt="Docs" width={14} height={14} />
+              <img src="/globe.svg" alt="Docs" width={14} height={14} />
               Token counting API docs
             </a>
             <a
-              href="https://github.com/HeavenOSK/claude-token-counter"
+              href="https://github.com/HeavenOSK/claude-token-counter-desktop-app"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 hover:text-gray-900"
               >
-              <Image src="/globe.svg" alt="GitHub" width={14} height={14} />
+              <img src="/globe.svg" alt="GitHub" width={14} height={14} />
               View source on GitHub
             </a>
           </div>

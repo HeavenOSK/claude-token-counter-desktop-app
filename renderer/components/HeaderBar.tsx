@@ -20,7 +20,7 @@ export const TitleBar: React.FC = () => {
       }
     };
     checkApiKey();
-  }, []);
+  }, [router.pathname]); // パス変更時に再実行されるように依存配列にrouter.pathnameを追加
 
   return (
     <div className="flex border border-b w-full border-solid pr-4 h-[51px]" style={{
