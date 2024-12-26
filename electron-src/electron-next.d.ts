@@ -1,4 +1,4 @@
-declare module "electron-next" {
+declare module 'electron-next' {
   interface Directories {
     production: string;
     development: string;

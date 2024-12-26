@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   type TokenCountHistoryItem,
   calculateTokenPricing,
-} from "../interfaces/history";
+} from '../interfaces/history';
 
 type Props = {
   item: TokenCountHistoryItem;
@@ -12,19 +12,19 @@ export const HistoryItem = ({ item }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString("en-US", {
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
+    return new Date(dateString).toLocaleString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
     });
   };
 
   const truncateText = (text: string) => {
-    const lines = text.split("\n");
+    const lines = text.split('\n');
     if (lines.length <= 4 && text.length <= 200) return text;
 
-    return `${lines.slice(0, 4).join("\n")}...`;
+    return `${lines.slice(0, 4).join('\n')}...`;
   };
 
   return (
@@ -37,13 +37,13 @@ export const HistoryItem = ({ item }: Props) => {
         <pre className="whitespace-pre bg-gray-50 p-2 rounded overflow-x-auto">
           {isExpanded ? item.text : truncateText(item.text)}
         </pre>
-        {(item.text.split("\n").length > 4 || item.text.length > 200) && (
+        {(item.text.split('\n').length > 4 || item.text.length > 200) && (
           <button
             type="button"
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-blue-500 hover:text-blue-700 mt-1"
           >
-            {isExpanded ? "Show less" : "Show more"}
+            {isExpanded ? 'Show less' : 'Show more'}
           </button>
         )}
       </div>
@@ -54,7 +54,7 @@ export const HistoryItem = ({ item }: Props) => {
         </div>
         <div className="grid grid-cols-2 gap-x-4">
           <div>
-            Input Price:{" "}
+            Input Price:{' '}
             <span className="font-bold">
               $
               {calculateTokenPricing(
@@ -64,7 +64,7 @@ export const HistoryItem = ({ item }: Props) => {
             </span>
           </div>
           <div>
-            Output Price:{" "}
+            Output Price:{' '}
             <span className="font-bold">
               $
               {calculateTokenPricing(
@@ -74,7 +74,7 @@ export const HistoryItem = ({ item }: Props) => {
             </span>
           </div>
           <div>
-            Cache Write:{" "}
+            Cache Write:{' '}
             <span className="font-bold">
               $
               {calculateTokenPricing(
@@ -84,7 +84,7 @@ export const HistoryItem = ({ item }: Props) => {
             </span>
           </div>
           <div>
-            Cache Read:{" "}
+            Cache Read:{' '}
             <span className="font-bold">
               $
               {calculateTokenPricing(
