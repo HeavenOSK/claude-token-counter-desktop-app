@@ -1,13 +1,13 @@
-import { Cog6ToothIcon, HomeIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import type React from "react";
-import { type CSSProperties, useEffect, useState } from "react";
-import { keychainUtils } from "../utils/keychain";
+import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import type React from 'react';
+import { type CSSProperties, useEffect, useState } from 'react';
+import { keychainUtils } from '../utils/keychain';
 
 export const TitleBar: React.FC = () => {
   const router = useRouter();
-  const isSettingsPage = router.pathname === "/settings";
+  const isSettingsPage = router.pathname === '/settings';
   const [hasApiKey, setHasApiKey] = useState<boolean>(true);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: router.pathname dependency needs to update
@@ -17,7 +17,7 @@ export const TitleBar: React.FC = () => {
         const apiKey = await keychainUtils.getApiKey();
         setHasApiKey(!!apiKey);
       } catch (error) {
-        console.error("Failed to check API key:", error);
+        console.error('Failed to check API key:', error);
         setHasApiKey(false);
       }
     };
@@ -28,17 +28,17 @@ export const TitleBar: React.FC = () => {
     <div
       className="flex border border-b w-full border-solid pr-4 h-[51px]"
       style={{
-        WebkitAppRegion: "drag",
+        WebkitAppRegion: 'drag',
       }}
     >
       {/* ドラッグ可能な領域 */}
       <div
         className="flex-1 flex items-center justify-end h-[51px]"
-        style={{ WebkitAppRegion: "drag" } as CSSProperties}
+        style={{ WebkitAppRegion: 'drag' } as CSSProperties}
       >
         <div
           className="flex items-center justify-center gap-2"
-          style={{ WebkitAppRegion: "no-drag" }}
+          style={{ WebkitAppRegion: 'no-drag' }}
         >
           {isSettingsPage ? (
             <Link

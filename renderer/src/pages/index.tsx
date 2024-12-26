@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { HistoryPanel } from "../components/HistoryPanel";
-import { useTokenHistory } from "../hooks/useTokenHistory";
-import { MODELS, type Model } from "../interfaces/model";
-import { keychainUtils } from "../utils/keychain";
+import { useEffect, useState } from 'react';
+import { HistoryPanel } from '../components/HistoryPanel';
+import { useTokenHistory } from '../hooks/useTokenHistory';
+import { MODELS, type Model } from '../interfaces/model';
+import { keychainUtils } from '../utils/keychain';
 
 const IndexPage = () => {
   const [model, setModel] = useState<Model>(MODELS[0]);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [tokenCount, setTokenCount] = useState<number | null>(null);
   const [hasApiKey, setHasApiKey] = useState<boolean>(false);
@@ -18,7 +18,7 @@ const IndexPage = () => {
         const apiKey = await keychainUtils.getApiKey();
         setHasApiKey(!!apiKey);
       } catch (error) {
-        console.error("Failed to check API key:", error);
+        console.error('Failed to check API key:', error);
         setHasApiKey(false);
       }
     };
@@ -38,9 +38,9 @@ const IndexPage = () => {
         tokenCount: count,
       });
     } catch (error) {
-      console.error("Failed to count tokens:", error);
+      console.error('Failed to count tokens:', error);
       alert(
-        "Failed to count tokens. Please make sure your API key is set correctly.",
+        'Failed to count tokens. Please make sure your API key is set correctly.',
       );
     } finally {
       setIsLoading(false);
@@ -100,7 +100,7 @@ const IndexPage = () => {
               disabled={isLoading || !text || !hasApiKey}
               className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
-              {isLoading ? "Counting..." : "Count Tokens"}
+              {isLoading ? 'Counting...' : 'Count Tokens'}
             </button>
 
             {!hasApiKey && (

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import { keychainUtils } from "../utils/keychain";
+import { useEffect, useState } from 'react';
+import { keychainUtils } from '../utils/keychain';
 
 const SettingsPage = () => {
-  const [apiKey, setApiKey] = useState("");
-  const [message, setMessage] = useState("");
+  const [apiKey, setApiKey] = useState('');
+  const [message, setMessage] = useState('');
   const [hasStoredKey, setHasStoredKey] = useState(false);
 
   const maskApiKey = (key: string) => {
     const visibleLength = Math.ceil(3); // Show 20%
     const visiblePart = key.slice(0, visibleLength); // Show first 20%
-    const maskedPart = "*".repeat(key.length - visibleLength); // Fill the rest with asterisks
+    const maskedPart = '*'.repeat(key.length - visibleLength); // Fill the rest with asterisks
     return visiblePart + maskedPart;
   };
 
@@ -19,7 +19,7 @@ const SettingsPage = () => {
         const savedApiKey = await keychainUtils.getApiKey();
         setHasStoredKey(!!savedApiKey);
       } catch (error) {
-        console.error("Failed to verify API Key:", error);
+        console.error('Failed to verify API Key:', error);
       }
     };
     checkStoredKey();
@@ -28,11 +28,11 @@ const SettingsPage = () => {
   const handleSave = async () => {
     try {
       await keychainUtils.saveApiKey(apiKey);
-      setMessage("API Key has been saved");
-      setApiKey("");
+      setMessage('API Key has been saved');
+      setApiKey('');
       setHasStoredKey(true);
     } catch (error) {
-      setMessage("Failed to save API Key");
+      setMessage('Failed to save API Key');
       console.error(error);
     }
   };
@@ -43,10 +43,10 @@ const SettingsPage = () => {
       if (savedApiKey) {
         alert(`Stored API Key:\n ${maskApiKey(savedApiKey).slice(0, 26)}`);
       } else {
-        alert("No API Key stored");
+        alert('No API Key stored');
       }
     } catch (error) {
-      alert("Failed to retrieve API Key");
+      alert('Failed to retrieve API Key');
       console.error(error);
     }
   };
@@ -84,7 +84,7 @@ const SettingsPage = () => {
             disabled={hasStoredKey && !apiKey}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
-            {hasStoredKey && !apiKey ? "Saved" : "Save"}
+            {hasStoredKey && !apiKey ? 'Saved' : 'Save'}
           </button>
           <button
             type="button"
@@ -100,9 +100,9 @@ const SettingsPage = () => {
               try {
                 await keychainUtils.deleteApiKey();
                 setHasStoredKey(false);
-                setMessage("API Key has been cleared");
+                setMessage('API Key has been cleared');
               } catch (error) {
-                setMessage("Failed to clear API Key");
+                setMessage('Failed to clear API Key');
                 console.error(error);
               }
             }}

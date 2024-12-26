@@ -1,5 +1,5 @@
-import type { TokenCountHistory } from "../interfaces/history";
-import { HistoryItem } from "./HistoryItem";
+import type { TokenCountHistory } from '../interfaces/history';
+import { HistoryItem } from './HistoryItem';
 
 type Props = {
   history: TokenCountHistory[];
@@ -8,7 +8,7 @@ type Props = {
 
 export const HistoryPanel = ({ history, onClear }: Props) => {
   const handleClearClick = () => {
-    if (window.confirm("Are you sure you want to clear the history?")) {
+    if (window.confirm('Are you sure you want to clear the history?')) {
       onClear();
     }
   };
@@ -23,8 +23,8 @@ export const HistoryPanel = ({ history, onClear }: Props) => {
           disabled={history.length === 0}
           className={`text-xs px-2 py-1 rounded ${
             history.length === 0
-              ? "text-gray-400 cursor-not-allowed"
-              : "text-blue-500 hover:bg-blue-50"
+              ? 'text-gray-400 cursor-not-allowed'
+              : 'text-blue-500 hover:bg-blue-50'
           }`}
         >
           clear
