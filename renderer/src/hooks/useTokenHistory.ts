@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { TokenCountHistory } from '../interfaces/history';
+import { useEffect, useState } from "react";
+import type { TokenCountHistory } from "../interfaces/history";
 
 export const useTokenHistory = () => {
   const [history, setHistory] = useState<TokenCountHistory[]>([]);
@@ -9,12 +9,14 @@ export const useTokenHistory = () => {
     window.electron.getHistory().then(setHistory).catch(console.error);
   }, []);
 
-  const addHistoryItem = async (item: Omit<TokenCountHistory, 'id' | 'timestamp'>) => {
+  const addHistoryItem = async (
+    item: Omit<TokenCountHistory, "id" | "timestamp">,
+  ) => {
     try {
       const updatedHistory = await window.electron.saveHistory(item);
       setHistory(updatedHistory);
     } catch (error) {
-      console.error('Failed to save history:', error);
+      console.error("Failed to save history:", error);
     }
   };
 
@@ -23,7 +25,7 @@ export const useTokenHistory = () => {
       await window.electron.clearHistory();
       setHistory([]);
     } catch (error) {
-      console.error('Failed to clear history:', error);
+      console.error("Failed to clear history:", error);
     }
   };
 

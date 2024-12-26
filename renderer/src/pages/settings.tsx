@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { keychainUtils } from '../utils/keychain';
+import { useEffect, useState } from "react";
+import { keychainUtils } from "../utils/keychain";
 
 const SettingsPage = () => {
-  const [apiKey, setApiKey] = useState('');
-  const [message, setMessage] = useState('');
+  const [apiKey, setApiKey] = useState("");
+  const [message, setMessage] = useState("");
   const [hasStoredKey, setHasStoredKey] = useState(false);
 
   const maskApiKey = (key: string) => {
     const visibleLength = Math.ceil(3); // Show 20%
     const visiblePart = key.slice(0, visibleLength); // Show first 20%
-    const maskedPart = '*'.repeat(key.length - visibleLength); // Fill the rest with asterisks
+    const maskedPart = "*".repeat(key.length - visibleLength); // Fill the rest with asterisks
     return visiblePart + maskedPart;
   };
 
@@ -19,7 +19,7 @@ const SettingsPage = () => {
         const savedApiKey = await keychainUtils.getApiKey();
         setHasStoredKey(!!savedApiKey);
       } catch (error) {
-        console.error('Failed to verify API Key:', error);
+        console.error("Failed to verify API Key:", error);
       }
     };
     checkStoredKey();
@@ -28,11 +28,11 @@ const SettingsPage = () => {
   const handleSave = async () => {
     try {
       await keychainUtils.saveApiKey(apiKey);
-      setMessage('API Key has been saved');
-      setApiKey('');
+      setMessage("API Key has been saved");
+      setApiKey("");
       setHasStoredKey(true);
     } catch (error) {
-      setMessage('Failed to save API Key');
+      setMessage("Failed to save API Key");
       console.error(error);
     }
   };
@@ -43,10 +43,10 @@ const SettingsPage = () => {
       if (savedApiKey) {
         alert(`Stored API Key:\n ${maskApiKey(savedApiKey).slice(0, 26)}`);
       } else {
-        alert('No API Key stored');
+        alert("No API Key stored");
       }
     } catch (error) {
-      alert('Failed to retrieve API Key');
+      alert("Failed to retrieve API Key");
       console.error(error);
     }
   };
@@ -55,7 +55,7 @@ const SettingsPage = () => {
     <main className="p-8 flex flex-col items-center h-full">
       <div className="w-full max-w-2xl pr-[240px]">
         <h1 className="text-3xl font-bold mb-8">Settings</h1>
-        
+
         <div className="">
           <div className="flex items-center gap-2 mb-2">
             <label htmlFor="apiKey" className="font-bold text-gray-700">
@@ -78,28 +78,31 @@ const SettingsPage = () => {
         </div>
 
         <div className="flex gap-4 mb-6">
-          <button 
-            onClick={handleSave} 
+          <button
+            type="button"
+            onClick={handleSave}
             disabled={hasStoredKey && !apiKey}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
-            {hasStoredKey && !apiKey ? 'Saved' : 'Save'}
+            {hasStoredKey && !apiKey ? "Saved" : "Save"}
           </button>
-          <button 
+          <button
+            type="button"
             onClick={handleTest}
             className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
             disabled={!hasStoredKey}
           >
             Show Key
           </button>
-          <button 
+          <button
+            type="button"
             onClick={async () => {
               try {
                 await keychainUtils.deleteApiKey();
                 setHasStoredKey(false);
-                setMessage('API Key has been cleared');
+                setMessage("API Key has been cleared");
               } catch (error) {
-                setMessage('Failed to clear API Key');
+                setMessage("Failed to clear API Key");
                 console.error(error);
               }
             }}
@@ -112,9 +115,7 @@ const SettingsPage = () => {
 
         {message && (
           <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-gray-600 overflow-hidden text-sm">
-            <div className="overflow-hidden">
-              {message}
-            </div>
+            <div className="overflow-hidden">{message}</div>
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import { Model } from "./model";
+import type { Model } from "./model";
 
 export type ModelPricing = {
   inputPrice: number;
@@ -8,22 +8,22 @@ export type ModelPricing = {
 };
 
 export const MODEL_PRICING: Record<Model, ModelPricing> = {
-  'claude-3-5-sonnet-20241022': {
+  "claude-3-5-sonnet-20241022": {
     inputPrice: 3,
     promptCacheWritePrice: 3.75,
-    promptCacheReadPrice: 0.30,
+    promptCacheReadPrice: 0.3,
     outputPrice: 15,
   },
-  'claude-3-5-haiku-20241022': {
-    inputPrice: 0.80,
+  "claude-3-5-haiku-20241022": {
+    inputPrice: 0.8,
     promptCacheWritePrice: 1,
     promptCacheReadPrice: 0.08,
     outputPrice: 4,
   },
-  'claude-3-opus-20240229': {
+  "claude-3-opus-20240229": {
     inputPrice: 15,
     promptCacheWritePrice: 18.75,
-    promptCacheReadPrice: 1.50,
+    promptCacheReadPrice: 1.5,
     outputPrice: 75,
   },
 } as const;
@@ -43,7 +43,10 @@ export type TokenPricing = {
   outputPrice: number;
 };
 
-export const calculateTokenPricing = (model: Model, tokenCount: number): TokenPricing => {
+export const calculateTokenPricing = (
+  model: Model,
+  tokenCount: number,
+): TokenPricing => {
   const pricing = MODEL_PRICING[model];
   if (!pricing) {
     throw new Error(`Unknown model: ${model}`);
