@@ -1,6 +1,6 @@
 // Inspired by https://zenn.dev/sprout2000/books/3691a679478de2/viewer/13600
-
-const { build } = require('electron-builder');
+// 
+import { build } from 'electron-builder';
 
 build({
   config: {
