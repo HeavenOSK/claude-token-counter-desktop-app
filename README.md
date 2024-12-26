@@ -23,6 +23,7 @@ A desktop application for counting tokens using the Claude API.
 
 - Node.js 22.12.0
 - [mise](https://mise.jdx.dev/) (recommended for Node.js version management)
+- [Biome](https://biomejs.dev/) (for linting and formatting)
 
 ### Setup
 
@@ -44,6 +45,13 @@ npm run dev
 - `npm run build` - Build the application
 - `npm run dist` - Create distribution package
 - `npm run type-check` - Run TypeScript type checking
+- `npm run clean` - Clean build directories
+- `npm run build-renderer` - Build Next.js frontend
+- `npm run build-electron` - Build Electron main process
+- `npm run pack-app` - Create unpacked application
+- `npm run release` - Create release build
+- `npm run lint` - Run Biome linter
+- `npm run lint:fix` - Run Biome linter with auto-fix
 
 ### Project Structure
 
@@ -53,6 +61,16 @@ npm run dev
 | `/electron-src` | Electron main process |
 | `/main` | Built Electron code |
 | `/dist` | Distribution package |
+
+### Development Tools
+
+#### Biome
+
+This project uses [Biome](https://biomejs.dev/) for linting and formatting. Configuration can be found in `biome.json`.
+
+#### Lefthook
+
+[Lefthook](https://github.com/evilmartians/lefthook) is used for managing Git hooks. It's automatically installed when you run `npm install` through the `prepare` script.
 
 ## License
 
