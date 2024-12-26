@@ -15,7 +15,10 @@
     "pack-app": "npm run build && electron-builder --dir",
     "dist": "npm run build && electron-builder",
     "type-check": "tsc -p ./renderer/tsconfig.json && tsc -p ./electron-src/tsconfig.json",
-    "release": "node ./build.js"
+    "release": "node ./build.js",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "prepare": "lefthook install"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.33.1",
@@ -27,12 +30,14 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "^14.18.63",
     "@types/react": "^16.14.52",
     "@types/react-dom": "^16.9.24",
     "autoprefixer": "^10.4.20",
     "electron": "^27.1.2",
     "electron-builder": "^24.9.1",
+    "lefthook": "^1.10.0",
     "next": "latest",
     "postcss": "^8.4.49",
     "rimraf": "^3.0.2",
@@ -41,9 +46,6 @@
   },
   "build": {
     "asar": true,
-    "files": [
-      "main",
-      "renderer/out"
-    ]
+    "files": ["main", "renderer/out"]
   }
 }

@@ -1,6 +1,6 @@
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import "../style.css";
-import  HeaderBar  from "../components/HeaderBar";
+import HeaderBar from "../components/HeaderBar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

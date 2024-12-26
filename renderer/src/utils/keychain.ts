@@ -6,7 +6,7 @@ export const keychainUtils = {
     try {
       await window.electron.saveApiKey(apiKey);
     } catch (error) {
-      console.error('Failed to save API key:', error);
+      console.error("Failed to save API key:", error);
       throw error;
     }
   },
@@ -18,7 +18,7 @@ export const keychainUtils = {
     try {
       return await window.electron.getApiKey();
     } catch (error) {
-      console.error('Failed to get API key:', error);
+      console.error("Failed to get API key:", error);
       throw error;
     }
   },
@@ -30,7 +30,7 @@ export const keychainUtils = {
     try {
       await window.electron.deleteApiKey();
     } catch (error) {
-      console.error('Failed to delete API key:', error);
+      console.error("Failed to delete API key:", error);
       throw error;
     }
   },
